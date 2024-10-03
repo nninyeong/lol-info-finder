@@ -19,6 +19,7 @@ const config: Config = {
         'primary-dark-gray': '#1f2b3e',
         'secondary-dark-gray': '#374357',
         'light-gray': '#e0e0e0',
+        'light-skyblue': '#cee8ff',
       },
     },
   },

@@ -46,6 +46,7 @@ export type Champion = {
   key: string;
   name: string;
   title: string;
+  lore: string;
   blurb: string;
   info: DataInfo;
   image: DataImage;

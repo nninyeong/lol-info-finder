@@ -2,6 +2,7 @@ import { getAllChampionsInfo } from '@/utils/serverApi';
 import { ChampionData } from '@/types/Champion';
 import Card from '@/components/Card';
 import PageGuide from '@/components/PageGuide';
+import { CHAMPION_IMAGE_BASE_URL } from '@/constants/api';
 
 const Page = async () => {
   const data: ChampionData = await getAllChampionsInfo();
@@ -16,7 +17,7 @@ const Page = async () => {
             <Card
               key={champion.id}
               id={champion.id}
-              img={`http://ddragon.leagueoflegends.com/cdn/14.19.1/img/champion/${champion.image.full}`}
+              img={`${CHAMPION_IMAGE_BASE_URL}/${champion.image.full}`}
               name={champion.name}
               title={champion.title}
             />
