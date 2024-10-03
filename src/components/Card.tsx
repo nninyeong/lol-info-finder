@@ -11,22 +11,21 @@ type CardProps = {
   title: string;
 };
 
-const Card = ({ img, name, title, id }: CardProps) => {
+const Card = ({ id, img, name, title }: CardProps) => {
   const pathname = usePathname();
   const detailRoute = pathname.includes('/champions') ? `/champions/${id}` : `/items/${id}}`;
-  console.log(detailRoute);
 
   return (
     <Link href={detailRoute}>
-      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 w-[400px] p-[20px]'>
+      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 py-[20px] group hover:bg-white'>
         <Image
           src={img}
           alt={name}
-          width={150}
-          height={150}
+          width={100}
+          height={100}
         />
-        <p className='text-white font-semibold text-[26px]'>{name}</p>
-        <p className='text-light-gray text-[22px]'>{title}</p>
+        <p className='text-white font-semibold text-[26px] group-hover:text-primary-dark-navy'>{name}</p>
+        <p className='text-light-gray text-[22px] group-hover:text-secondary-dark-navy'>{title}</p>
       </div>
     </Link>
   );
