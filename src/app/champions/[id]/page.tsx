@@ -1,5 +1,5 @@
 import { getChampionDetails } from '@/utils/serverApi';
-import { Champion, ChampionData } from '@/types/Champion';
+import { ChampionData } from '@/types/Champion';
 import Image from 'next/image';
 import { CHAMPION_IMAGE_BASE_URL } from '@/constants/api';
 
