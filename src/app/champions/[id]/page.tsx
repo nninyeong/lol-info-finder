@@ -2,9 +2,21 @@ import { getChampionDetails } from '@/utils/serverApi';
 import { ChampionData } from '@/types/Champion';
 import Image from 'next/image';
 import { CHAMPION_IMAGE_BASE_URL } from '@/constants/api';
+import { Metadata } from 'next';
 
 type ParamsType = {
   params: { id: string };
+};
+
+export const generateMetadata = async ({ params: { id } }: ParamsType): Promise<Metadata> => {
+  const championDetail: ChampionData = await getChampionDetails(id);
+  const { data } = championDetail;
+  const { name, title, lore } = data[id];
+
+  return {
+    title: `${name} | 리그오브레전드 챔피언 정보`,
+    description: `리그오브레전드 챔피언 ${name}(${title}): ${lore}`,
+  };
 };
 
 const Page = async ({ params: { id } }: ParamsType) => {
