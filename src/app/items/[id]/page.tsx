@@ -3,6 +3,7 @@ import { getAllItemsInfo } from '@/utils/serverApi';
 import Image from 'next/image';
 import { ITEM_IMAGE_BASE_URL } from '@/constants/api';
 import { Metadata } from 'next';
+import { Stats } from 'node:fs';
 
 type ParamsType = {
   params: { id: string };
@@ -16,6 +17,15 @@ export const generateMetadata = async ({ params: { id } }: ParamsType): Promise<
     title: `${name} | 리그오브레전드 아이템 정보`,
     description: `리그오브레전드 아이템 ${name}: (${plaintext})`,
   };
+};
+
+export const generateStaticParams = async () => {
+  const itemsInfoResponse = await getAllItemsInfo();
+  const allItemKeys = Object.keys(itemsInfoResponse.data);
+
+  return allItemKeys.map((id: string) => {
+    return { id: id };
+  });
 };
 
 const Page = async ({ params: { id } }: ParamsType) => {
