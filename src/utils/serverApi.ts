@@ -1,5 +1,7 @@
 // 서버 컴포넌트에서 사용할 데이터 페칭 함수들
 'use server';
+import { ItemData } from '@/types/item';
+
 export async function getLatestVersion() {
   const response = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
   const versions = await response.json();
@@ -34,7 +36,9 @@ export async function getChampionDetails(name: string) {
 export async function getAllItemsInfo() {
   const latestVersion = await getLatestVersion();
 
-  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`);
+  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`, {
+    cache: 'force-cache',
+  });
 
   if (!response.ok) {
     const errorText = await response.text();
@@ -42,5 +46,6 @@ export async function getAllItemsInfo() {
     throw new Error(`Failed to fetch items details: ${response.status}`);
   }
 
-  return await response.json();
+  const data: ItemData = await response.json();
+  return data;
 }

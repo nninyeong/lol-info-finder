@@ -14,7 +14,7 @@ type CardProps = {
 const Card = ({ id, img, name, title }: CardProps) => {
   const pathname = usePathname();
   const detailRoute =
-    pathname.includes('/champions') || pathname.includes('/rotation') ? `/champions/${id}` : `/items/${id}}`;
+    pathname.includes('/champions') || pathname.includes('/rotation') ? `/champions/${id}` : `/items/${id}`;
 
   return (
     <Link href={detailRoute}>
