@@ -3,7 +3,6 @@ import { getAllItemsInfo } from '@/utils/serverApi';
 import Image from 'next/image';
 import { ITEM_IMAGE_BASE_URL } from '@/constants/api';
 import { Metadata } from 'next';
-import { Stats } from 'node:fs';
 
 type ParamsType = {
   params: { id: string };
