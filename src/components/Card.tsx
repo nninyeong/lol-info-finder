@@ -18,7 +18,7 @@ const Card = ({ id, img, name, title }: CardProps) => {
 
   return (
     <Link href={detailRoute}>
-      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 py-[20px] group hover:bg-white'>
+      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 h-[250px] py-[20px] group hover:bg-white'>
         <Image
           src={img}
           alt={name}
