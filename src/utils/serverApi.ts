@@ -30,3 +30,17 @@ export async function getChampionDetails(name: string) {
 
   return await response.json();
 }
+
+export async function getAllItemsInfo() {
+  const latestVersion = await getLatestVersion();
+
+  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Error fetching items details: ${response.status}, ${errorText}`);
+    throw new Error(`Failed to fetch items details: ${response.status}`);
+  }
+
+  return await response.json();
+}

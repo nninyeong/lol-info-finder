@@ -1,14 +1,4 @@
-import { StaticImageData } from 'next/image';
-
-type DataImage = {
-  full: string | StaticImageData;
-  sprite: string | StaticImageData;
-  group: string;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-};
+import { DataImage } from '@/types/common';
 
 type DataStats = {
   hp: number;
