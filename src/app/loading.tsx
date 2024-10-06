@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import rabbit from '../public/rabbit.gif';
+import rabbit from 'public/rabbit.gif';
 
 const Loading = () => {
   return (

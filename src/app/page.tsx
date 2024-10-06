@@ -1,8 +1,8 @@
 import PageGuide from '@/components/PageGuide';
 import ImageLink from '@/components/ImageLink';
-import championImg from '../public/championImg.webp';
-import itemImg from '../public/itemLinkImg.webp';
-import rotationImg from '../public/rotationLinkImg.webp';
+import championImg from 'public/championImg.webp';
+import itemImg from 'public/itemLinkImg.webp';
+import rotationImg from 'public/rotationLinkImg.webp';
 
 export default function Home() {
   return (
