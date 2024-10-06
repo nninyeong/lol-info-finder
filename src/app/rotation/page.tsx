@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     const fetchRotationData = async () => {
       try {
-        const response = await fetch(`${process.env.DOMAIN_URL}/api/rotation`, { method: 'GET' });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/rotation`, { method: 'GET' });
         const rotations = await response.json();
         const freeChampions = rotations;
 
