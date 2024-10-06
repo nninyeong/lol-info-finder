@@ -51,5 +51,3 @@ export type ChampionData = {
   version: string;
   data: Record<string, Champion>;
 };
-
-export type ChampionDetail = {};

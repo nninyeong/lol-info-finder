@@ -1,5 +1,5 @@
 'use client';
-import { CHAMPION_IMAGE_BASE_URL, DOMAIN_URL } from '@/constants/api';
+import { CHAMPION_IMAGE_BASE_URL } from '@/constants/api';
 import { useEffect, useState } from 'react';
 import { Champion } from '@/types/Champion';
 import Card from '@/components/Card';
@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     const fetchRotationData = async () => {
       try {
-        const response = await fetch(`${DOMAIN_URL}/api/rotation`, { method: 'GET' });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/rotation`, { method: 'GET' });
         const rotations = await response.json();
         const freeChampions = rotations;
 
@@ -37,6 +37,7 @@ const Page = () => {
           {freeChampions!.map((champion) => {
             return (
               <Card
+                key={champion.id}
                 id={champion.id}
                 img={`${CHAMPION_IMAGE_BASE_URL}/${champion.image.full}`}
                 name={champion.name}
