@@ -2,6 +2,8 @@
 import React from 'react';
 
 const GlobalError = ({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) => {
+  console.error('Unexpected Error: ', error);
+
   return (
     <html>
       <body>

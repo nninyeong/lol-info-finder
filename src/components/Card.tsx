@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 type CardProps = {
   id: string;
-  img: any;
+  img: string;
   name: string;
   title: string;
 };
