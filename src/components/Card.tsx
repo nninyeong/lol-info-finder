@@ -14,11 +14,11 @@ type CardProps = {
 const Card = ({ id, img, name, title }: CardProps) => {
   const pathname = usePathname();
   const detailRoute =
-    pathname.includes('/champions') || pathname.includes('/rotation') ? `/champions/${id}` : `/items/${id}}`;
+    pathname.includes('/champions') || pathname.includes('/rotation') ? `/champions/${id}` : `/items/${id}`;
 
   return (
     <Link href={detailRoute}>
-      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 py-[20px] group hover:bg-white'>
+      <div className='flex flex-col gap-1 justify-center items-center border border-amber-50 h-[250px] py-[20px] group hover:bg-white'>
         <Image
           src={img}
           alt={name}
