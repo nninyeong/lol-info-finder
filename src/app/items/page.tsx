@@ -5,8 +5,7 @@ import { ITEM_IMAGE_BASE_URL } from '@/constants/api';
 import PageGuide from '@/components/PageGuide';
 
 const Page = async () => {
-  const itemsInfo: ItemData = await getAllItemsInfo();
-  const itemData = itemsInfo.data;
+  const { data: itemData }: ItemData = await getAllItemsInfo();
 
   return (
     <div className='flex flex-col gap-3 m-5'>
