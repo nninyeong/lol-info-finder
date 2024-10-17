@@ -1,9 +1,10 @@
 // 서버 컴포넌트에서 사용할 데이터 페칭 함수들
 'use server';
 import { ItemData } from '@/types/item';
+import { RIOT_DATA_BASE_URL, RIOT_VERSION_URL } from '@/constants/api';
 
 export async function getLatestVersion() {
-  const response = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
+  const response = await fetch(`${RIOT_VERSION_URL}`);
   const versions = await response.json();
   return versions[0];
 }
@@ -11,18 +12,15 @@ export async function getLatestVersion() {
 export async function getAllChampionsInfo() {
   const latestVersion = await getLatestVersion();
 
-  const detailResponse = await fetch(
-    `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/champion.json`,
-    {
-      next: { revalidate: 86400 },
-    },
-  );
+  const detailResponse = await fetch(`${RIOT_DATA_BASE_URL}/${latestVersion}/data/ko_KR/champion.json`, {
+    next: { revalidate: 86400 },
+  });
 
   return await detailResponse.json();
 }
 
 export async function getChampionDetails(name: string) {
-  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion/${name}.json`);
+  const response = await fetch(`${RIOT_DATA_BASE_URL}/14.19.1/data/ko_KR/champion/${name}.json`);
 
   if (!response.ok) {
     const errorText = await response.text(); // 에러 내용을 텍스트로 가져와서 확인
@@ -36,7 +34,7 @@ export async function getChampionDetails(name: string) {
 export async function getAllItemsInfo() {
   const latestVersion = await getLatestVersion();
 
-  const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/ko_KR/item.json`, {
+  const response = await fetch(`${RIOT_DATA_BASE_URL}/${latestVersion}/data/ko_KR/item.json`, {
     cache: 'force-cache',
   });
 
