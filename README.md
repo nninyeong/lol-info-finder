@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Riot Games API 기반 리그오브레전드 정보 조회 서비스
 
-## Getting Started
+Riot Games API를 사용해 리그오브레전드의 챔피언과 아이템 정보를 조회할 수 있는 서비스입니다. 챔피언 및 아이템 목록을 제공하며, 각각의 상세 정보 페이지로 이동하여 세부 데이터를 확인할 수 있습니다.
 
-First, run the development server:
+<br/>
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 기술 스택
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework**: Next.js
+- **언어**: TypeScript
+- **스타일링**: Tailwind CSS
+- **배포**: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br/>
+<br/>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 주요 기능
 
-## Learn More
+### 1. 챔피언 전체 목록 조회
+- 챔피언 데이터를 하루 단위로 재검증하여 **ISR** 방식으로 렌더링
+- 챔피언 클릭 시 챔피언의 상세 페이지로 이동
+- 재사용 가능한 `Card` 컴포넌트로 챔피언/아이템 상세 페이지로 이동할 수 있는 경로 구분
 
-To learn more about Next.js, take a look at the following resources:
+### 2. 아이템 전체 목록 조회
+- **SSG** 방식을 사용해 빌드 시점에 정적 페이지를 생성, 초기 로딩 속도를 개선
+- `generateStaticParams`를 사용해 아이템 상세 페이지를 미리 생성하여 페이지 전환 속도를 최적화
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. 챔피언/아이템 상세 페이지
+- **동적 메타데이터**를 생성하여 SEO 향상
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. 글로벌 로딩 및 에러 페이지 구현
+- 로딩과 에러 상황에서 사용자에게 안내 메시지를 제공하여 사용자 경험(UX) 개선
 
-## Deploy on Vercel
+<br/>
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 트러블슈팅
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. 동적 라우팅된 아이템 상세 페이지 경로에 의도치 않은 데이터 추가
+- **문제**: 일부 아이템의 경로에 불필요한 데이터가 포함되어 있었습니다.
+- **시도**: 전체 아이템에서 공통적인 현상인지 확인 후, 모두 동일한 데이터가 추가되는 것으로 이동 경로 지정에 실수가 있었음을 추측.
+- **해결**: Link 태그의 `href` 속성에 오타가 있는 것을 발견하여 수정.
+
+### 2. 빌드 후 환경 변수 인식 오류
+- **문제**: 개발 환경에서는 문제가 없었던 환경 변수가 빌드 환경에서 인식되지 않았습니다.
+- **해결**: `NEXT_PUBLIC_` 접두사를 붙여 클라이언트에서 환경 변수를 인식하도록 수정.
+
+### 3. Vercel 배포 시 정적 파일 경로 인식 오류
+- **문제**: 배포 후 일부 정적 파일의 경로를 인식하지 못하는 문제가 발생했습니다.
+- **해결**: GitHub에서 대소문자를 변경사항으로 구분하지 않는 문제로 인해 Git 캐시를 삭제하고 다시 커밋하여 문제를 해결.
+
+<br/>
+<br/>
+
+## 어려웠던 점과 회고
+
+Next.js를 처음 사용하면서, 여러가지 기능을 알게됐지만 각 기능을 어떻게 사용하는지 이해가 부족했고 요구사항의 이해가 어려워 구현에도 어려움을 느꼈다. 우선 과제의 필수 요구사항을 먼저 마무리하고 Next.js에서 헷갈렸던 부분을 공부하는 시간을 가졌는데 답답한 부분이 모두 해소된 건 아니지만 확실히 기능과 요구사항에 대해 어느정도는 파악할 수 있게된 것 같다.
+과제 자체에는 아쉬운 부분이 있지만, 단순히 기능을 사용하는 것보다 그 기능을 왜 사용하는지, 어떤 특징이 있는지 잘 이해하는 것이 중요하다는 점을 다시 한 번 느꼈다.
