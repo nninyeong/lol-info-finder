@@ -1,7 +1,7 @@
 import { ChampionRotation } from '@/types/ChampionRotation';
 import { NextResponse } from 'next/server';
 import { getAllChampionsInfo } from '@/utils/serverApi';
-import { ChampionData } from '@/types/Champion';
+import {Champion, ChampionData} from '@/types/Champion';
 
 export async function GET() {
   const apiKey = process.env.RIOT_API_KEY;
@@ -24,9 +24,13 @@ export async function GET() {
 
   const allChampions: ChampionData = await getAllChampionsInfo();
 
-  const freeChampions = Object.values(allChampions.data).filter((champion) => {
-    return freeChampionIds.includes(+champion.key);
-  });
+  const freeChampions = Object.values(allChampions.data).reduce<Champion[]>((acc, champion) => {
+    if(freeChampionIds.includes(parseInt(champion.key, 10))) {
+      acc.push(champion);
+    }
+
+    return acc;
+  }, []);
 
   return NextResponse.json(freeChampions);
 }
